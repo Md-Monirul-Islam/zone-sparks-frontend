@@ -1,0 +1,108 @@
+/* signup start here */
+/* account.css */
+
+.signup-form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.signup-form h2 {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.signup-form form div {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.signup-form label {
+    display: block;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.signup-form input {
+    width: 100%;
+    padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.signup-form input:focus {
+    border-color: #007bff;
+}
+
+.signup-form button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signup-form button:hover {
+    background-color: #0056b3;
+}
+
+.signup-form p {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.signup-form p.success {
+    color: #28a745;
+}
+
+.signup-form p.error {
+    color: #dc3545;
+}
+
+.signup-form .icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff;
+    font-size: 1.2rem;
+}
+
+.password-field {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+.icon {
+    margin-right: 5px;
+    margin-top: 15px;
+}
+
+/* signup end here */
+
+
+/* login start here */
+
+/* login end here */
