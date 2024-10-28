@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Signup from './account_app/Signup';
 import Login from './account_app/Login';
 import Navbar from './components/Navbar';
+import AddCategory from './category/AddCategory';
+import CategoryList from './category/CategoryList';
+import MainLayout from './MainLayout';
 
 function App() {
   return (
@@ -19,6 +22,18 @@ function App() {
 
       <Routes>
         <Route path='/login/' element={<Login />} />
+      </Routes>
+
+      <Routes>
+        <Route path='/add/category/' element={<AddCategory />} />
+      </Routes>
+
+      <Routes>
+        <Route path='/category/list/' element={<CategoryList />} />
+      </Routes>
+
+      <Routes>
+        <Route path="categories" element={<CategoryList />} />
       </Routes>
     </>
   );
