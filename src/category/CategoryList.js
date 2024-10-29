@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../Variable';
 import Sidenav from '../Sidenav';
-// import './CategoryList.css';
 
 const CategoryList = () => {
     const [categories, setCategories] = useState([]);
@@ -81,15 +80,16 @@ const CategoryList = () => {
 
     return (
         <div className="d-flex">
-            <div className="col-md-3 col-12 mb-2">
+            {/* Sidenav */}
+            <div className="col-md-3 col-12">
                 <Sidenav />
             </div>
-            <div className="col-md-9 col-12 mb-2 m-3">
-                <h2 className="text-center mb-4">Categories</h2>
-                <button>
-                    <Link
-                        to="/add/category/"
-                      >
+            
+            {/* Main Content */}
+            <div className="col-md-9 col-12" style={{ paddingTop: 0 }}>
+                <h2 className="text-center mt-3">Categories</h2>
+                <button className="btn btn-primary mb-3">
+                    <Link to="/add/category/" className="text-white text-decoration-none">
                         Add Category
                     </Link>
                 </button>
@@ -172,10 +172,10 @@ const CategoryList = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary">Update Category</button>
+                        <button type="submit" className="btn btn-primary btn-sm">Update</button>
                         <button
                             onClick={() => setSelectedCategory(null)}
-                            className="btn btn-secondary ms-2"
+                            className="btn btn-secondary ms-2 mt-3"
                         >
                             Cancel
                         </button>
