@@ -1,19 +1,36 @@
-// src/Sidenav.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import './Sidenav.css'; // Assuming custom CSS is in 'Sidenav.css'
 
 const Sidenav = () => {
+    const location = useLocation();
     return (
-        <div className="sidenav">
-            <h4>Navigation</h4>
+        <div className="sidenav p-3">
             <ul className="list-unstyled">
                 <li>
-                    <Link to="/categories">Categories</Link>
+                    <Link
+                        to="/dashboard/"
+                        className={`list-group-item list-group-item-action ${location.pathname === '/dashboard/' ? 'active' : ''}`}
+                    >
+                        Dashboard
+                    </Link>
                 </li>
                 <li>
-                    <Link to="/products">Products</Link>
+                    <Link
+                        to="/categories/"
+                        className={`list-group-item list-group-item-action ${location.pathname === '/categories/' ? 'active' : ''}`}
+                    >
+                        Categories
+                    </Link>
                 </li>
-                {/* Add other links as needed */}
+                <li>
+                    <Link
+                        to="/products/"
+                        className={`list-group-item list-group-item-action ${location.pathname === '/products/' ? 'active' : ''}`}
+                    >
+                        Products
+                    </Link>
+                </li>
             </ul>
         </div>
     );

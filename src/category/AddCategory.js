@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../Variable';
 import './AddCategory.css'; // Optional: Import your custom CSS file
+import Sidenav from '../Sidenav';
 
 const AddCategory = () => {
     const [categoryName, setCategoryName] = useState('');
@@ -44,43 +45,53 @@ const AddCategory = () => {
 
     return (
         <div className="container mt-5">
-            <h2 className="text-center mb-4">Add Category</h2>
-            <form onSubmit={handleSubmit} className="border p-4 rounded shadow">
-                <div className="mb-3">
-                    <label htmlFor="categoryName" className="form-label">Category Name:</label>
-                    <input
-                        type="text"
-                        id="categoryName"
-                        className="form-control"
-                        value={categoryName}
-                        onChange={(e) => setCategoryName(e.target.value)}
-                        required
-                    />
+            <div className="row">
+                {/* Sidebar Column */}
+                <div className="col-md-3 col-12 mb-2">
+                    <Sidenav />
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="description" className="form-label">Description:</label>
-                    <textarea
-                        id="description"
-                        className="form-control"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                    />
+
+                {/* Form Column */}
+                <div className="col-md-9 col-12 mb-2">
+                    <h2 className="text-center mb-4">Add Category</h2>
+                    <form onSubmit={handleSubmit} className="border p-4 rounded shadow">
+                        <div className="mb-3">
+                            <label htmlFor="categoryName" className="form-label">Category Name:</label>
+                            <input
+                                type="text"
+                                id="categoryName"
+                                className="form-control"
+                                value={categoryName}
+                                onChange={(e) => setCategoryName(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="description" className="form-label">Description:</label>
+                            <textarea
+                                id="description"
+                                className="form-control"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="categoryImage" className="form-label">Category Image:</label>
+                            <input
+                                type="file"
+                                id="categoryImage"
+                                className="form-control"
+                                accept="image/*"
+                                onChange={(e) => setCategoryImage(e.target.files[0])}
+                            />
+                        </div>
+                        {error && <p className="text-danger">{error}</p>}
+                        {success && <p className="text-success">{success}</p>}
+                        <button type="submit" className="btn btn-primary">Add Category</button>
+                    </form>
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="categoryImage" className="form-label">Category Image:</label>
-                    <input
-                        type="file"
-                        id="categoryImage"
-                        className="form-control"
-                        accept="image/*"
-                        onChange={(e) => setCategoryImage(e.target.files[0])}
-                    />
-                </div>
-                {error && <p className="text-danger">{error}</p>}
-                {success && <p className="text-success">{success}</p>}
-                <button type="submit" className="btn btn-primary">Add Category</button>
-            </form>
+            </div>
         </div>
     );
 };

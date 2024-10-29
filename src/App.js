@@ -6,7 +6,6 @@ import Login from './account_app/Login';
 import Navbar from './components/Navbar';
 import AddCategory from './category/AddCategory';
 import CategoryList from './category/CategoryList';
-import MainLayout from './MainLayout';
 
 function App() {
   return (
