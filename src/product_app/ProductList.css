@@ -1,0 +1,13 @@
+/* .content {
+    position: relative;
+} */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-product-button {
+    margin-bottom: 20px;
+}

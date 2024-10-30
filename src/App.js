@@ -6,6 +6,8 @@ import Login from './account_app/Login';
 import Navbar from './components/Navbar';
 import AddCategory from './category/AddCategory';
 import CategoryList from './category/CategoryList';
+import ProductList from './product_app/ProductList';
+import AddProduct from './product_app/AddProduct';
 
 function App() {
   return (
@@ -32,7 +34,15 @@ function App() {
       </Routes>
 
       <Routes>
-        <Route path="categories" element={<CategoryList />} />
+        <Route path="/categories/" element={<CategoryList />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/product/list/" element={<ProductList />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/add/product/" element={<AddProduct />} />
       </Routes>
     </>
   );

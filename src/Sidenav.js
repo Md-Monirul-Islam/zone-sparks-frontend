@@ -25,8 +25,8 @@ const Sidenav = () => {
                 </li>
                 <li>
                     <Link
-                        to="/products/"
-                        className={`list-group-item list-group-item-action ${location.pathname === '/products/' ? 'active' : ''}`}
+                        to="/product/list/"
+                        className={`list-group-item list-group-item-action ${location.pathname === '/product/list/' ? 'active' : ''}`}
                     >
                         Products
                     </Link>
