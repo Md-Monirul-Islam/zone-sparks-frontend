@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { baseUrl } from '../Variable';
+import Sidenav from '../Sidenav';
 
 const EditProduct = () => {
     const { productId } = useParams();
@@ -83,7 +84,9 @@ const EditProduct = () => {
     if (loading) return <div>Loading...</div>; // Loading state handling
 
     return (
-        <div className="container mt-5">
+        <div><br></br><br></br>
+            <Sidenav />
+            <div className="container mt-5">
             <h2>Edit Product</h2>
             {error && <p className="text-danger">{error}</p>}
             <form onSubmit={handleSubmit}>
@@ -142,7 +145,7 @@ const EditProduct = () => {
                         <img
                             src={formData.product_image}
                             alt="Current Product"
-                            style={{ width: '100px', height: 'auto' }} // Adjust the size as needed
+                            style={{ width: '100px', height: 'auto' }}
                         />
                     )}
                     <input
@@ -156,6 +159,7 @@ const EditProduct = () => {
                     Update Product
                 </button>
             </form>
+        </div><br></br>
         </div>
     );
 };
