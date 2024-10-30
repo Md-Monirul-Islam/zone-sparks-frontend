@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 import { baseUrl } from "../Variable.js";
 import "./login.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,6 +19,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const { login } = useAuth(); // Access login function from context
 
@@ -27,25 +29,26 @@ const Login = () => {
     setSuccess("");
 
     try {
-      const response = await axios.post(`${api_url}/login/`, {
-        email,
-        password,
-      });
-      
-      if (response.status === 200) {
-        login({
-          user_id: response.data.user_id,
-          email: response.data.email,
+        const response = await axios.post(`${api_url}/login/`, {
+            email,
+            password,
         });
         
-        setSuccess("Login successful!");
-        setEmail("");
-        setPassword("");
+        if (response.status === 200) {
+          const { user_id, email, token } = response.data;
+          login({ user_id, email, token }); // store token in AuthContext
+          localStorage.setItem('token', token); // store token in localStorage for future use
+          setSuccess("Login successful!");
+          setEmail("");
+          setPassword("");
+          navigate('/dashboard/');
       }
+      
     } catch (err) {
-      setError(err.response?.data?.error || "An error occurred during login");
+        setError(err.response?.data?.error || "An error occurred during login");
     }
-  };
+};
+
 
   return (
     <div className="login-form">
