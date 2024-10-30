@@ -8,6 +8,7 @@ import AddCategory from './category/AddCategory';
 import CategoryList from './category/CategoryList';
 import ProductList from './product_app/ProductList';
 import AddProduct from './product_app/AddProduct';
+import EditProduct from './product_app/EditProduct';
 
 function App() {
   return (
@@ -43,6 +44,10 @@ function App() {
 
       <Routes>
         <Route path="/add/product/" element={<AddProduct />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/edit/product/:productId" element={<EditProduct />} />
       </Routes>
     </>
   );

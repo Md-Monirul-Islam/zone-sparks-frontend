@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { baseUrl } from '../Variable';
 import Sidenav from '../Sidenav';
@@ -8,6 +8,7 @@ import './ProductList.css';
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     // Fetch products on component mount
     useEffect(() => {
@@ -22,6 +23,25 @@ const ProductList = () => {
         } catch (err) {
             setError('Failed to fetch products. Please try again.');
         }
+    };
+
+    // Handle delete product
+    const handleDelete = async (productId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+        if (confirmDelete) {
+            try {
+                await axios.delete(`${baseUrl}/products/${productId}/delete/`);
+                setProducts(products.filter(product => product.id !== productId));
+                alert('Product deleted successfully');
+            } catch (err) {
+                setError('Failed to delete product. Please try again.');
+            }
+        }
+    };
+
+    // Redirect to edit page
+    const handleEdit = (productId) => {
+        navigate(`/edit/product/${productId}`);
     };
 
     return (
@@ -58,13 +78,13 @@ const ProductList = () => {
                                 </td>
                                 <td className="d-flex">
                                     <button
-                                        
+                                        onClick={() => handleEdit(product.id)}
                                         className="btn btn-warning btn-sm me-2"
                                     >
                                         Edit
                                     </button>
                                     <button
-                                        
+                                        onClick={() => handleDelete(product.id)}
                                         className="btn btn-danger btn-sm"
                                     >
                                         Delete
