@@ -3,6 +3,7 @@ import axios from 'axios';
 import ProductCard from './ProductCard';
 import { baseUrl } from '../Variable';
 
+
 const HomePage = () => {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState('');
@@ -25,7 +26,7 @@ const HomePage = () => {
             {error && <p className="text-danger">{error}</p>}
             <div className="row">
                 {products.map((product) => (
-                    <div key={product.id} className="col-md-4 mb-4">
+                    <div key={product.id} className="col-md-3 mb-4">
                         <ProductCard product={product} />
                     </div>
                 ))}

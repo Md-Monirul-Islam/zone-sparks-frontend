@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ProductList.css'
 
 const ProductCard = ({ product }) => {
@@ -8,7 +9,7 @@ const ProductCard = ({ product }) => {
             <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
                 <p className="card-text">Price: TK. {product.price}</p>
-                {/* <p className="card-text">{product.description}</p> */}
+                <Link to='' className="buy-button">Add to Cart</Link>
             </div>
         </div>
     );
