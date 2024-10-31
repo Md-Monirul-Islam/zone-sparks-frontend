@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { baseUrl } from '../Variable.js';
 import './signup.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,6 +13,7 @@ const Signup = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [showPassword, setShowPassword] = useState(false); // State for password visibility
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,7 +30,8 @@ const Signup = () => {
                 setSuccess('Account created successfully. You can now log in.');
                 setEmail('');
                 setPassword('');
-            }
+            };
+            navigate('/login/');
         } catch (err) {
             setError(err.response?.data?.error || 'An error occurred during signup');
         }
