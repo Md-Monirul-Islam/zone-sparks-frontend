@@ -11,6 +11,7 @@ import AddProduct from './product_app/AddProduct';
 import EditProduct from './product_app/EditProduct';
 import Dashboard from './dashboard/Dashboard';
 import UserProfileUpdate from './account_app/UserProfileUpdate';
+import HomePage from './home_page_app/HomePage';
 
 function App() {
 
@@ -23,9 +24,9 @@ function App() {
   return (
     <>
     <Navbar />
-      {/* <Routes>
-        <Route path='/' element={<Home />} />
-      </Routes> */}
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+      </Routes>
 
       <Routes>
         <Route path='/signup/' element={<Signup />} />
