@@ -51,7 +51,7 @@ export default function Navbar() {
             </ul>
           </div>
         </div>
-      </nav>
+      </nav><br></br><br></br><br></br><br></br>
     </div>
   );
 }

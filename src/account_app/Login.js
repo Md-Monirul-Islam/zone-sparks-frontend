@@ -50,42 +50,43 @@ const Login = () => {
 };
 
 
-  return (
-    <div className="login-form">
-      {error && <p className="error">{error}</p>}
-      {success && <p className="success">{success}</p>}
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="input-container">
-          <label>Email:</label>
-          <div className="input-wrapper">
-            <FontAwesomeIcon icon={faEnvelope} className="icon" />
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-            />
-          </div>
-        </div>
-        <div className="input-container">
-          <label>Password:</label>
-          <div className="input-wrapper">
-            <FontAwesomeIcon icon={faLock} className="icon" />
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
-            />
-          </div>
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
-};
-
+return (
+  <div className="login-container">
+      <div className="login-form">
+          {error && <p className="error">{error}</p>}
+          {success && <p className="success">{success}</p>}
+          <h2>Login</h2>
+          <form onSubmit={handleSubmit}>
+              <div className="input-container">
+                  <label>Email:</label>
+                  <div className="input-wrapper">
+                      <FontAwesomeIcon icon={faEnvelope} className="icon" />
+                      <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="Enter your email"
+                          required
+                      />
+                  </div>
+              </div>
+              <div className="input-container">
+                  <label>Password:</label>
+                  <div className="input-wrapper">
+                      <FontAwesomeIcon icon={faLock} className="icon" />
+                      <input
+                          type={showPassword ? "text" : "password"}
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          placeholder="Enter your password"
+                          required
+                      />
+                  </div>
+              </div>
+              <button type="submit">Login</button>
+          </form>
+      </div>
+  </div>
+);
+}
 export default Login;

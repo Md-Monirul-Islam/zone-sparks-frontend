@@ -1,5 +1,5 @@
 .sidenav {
-    background-color: #f8f9fa;
+    background-color: #343a40; /* Darker color for better contrast */
     border-right: 1px solid #dee2e6;
     height: 100vh;
     position: fixed;
@@ -7,13 +7,20 @@
     left: 0;
     padding-top: 20px;
     width: 250px;
+    color: #ffffff;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+}
+
+.sidenav ul {
+    padding: 0;
 }
 
 .sidenav .list-group-item {
-    color: #495057;
+    color: #ffffff;
     font-weight: 500;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 20px;
     transition: all 0.3s ease;
 }
 
@@ -24,6 +31,7 @@
 }
 
 .sidenav .list-group-item:hover {
-    background-color: #e9ecef;
-    color: #007bff;
+    background-color: #495057;
+    color: #ffffff;
+    text-decoration: none;
 }

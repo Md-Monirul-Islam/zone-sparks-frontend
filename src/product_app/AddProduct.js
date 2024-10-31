@@ -72,7 +72,7 @@ const AddProduct = () => {
     };
 
     return (
-        <div className="container mt-5"><br></br><br></br>
+        <div className="container">
             <Sidenav />
             <h2 className="text-center mb-4">Add New Product</h2>
             {error && <p className="text-danger">{error}</p>}
