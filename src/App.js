@@ -59,7 +59,7 @@ function App() {
 
                 <Route path="/user-profile/:userId" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
                 
-                <Route path="/update-user-profile/" element={<ProtectedRoute><UserProfileUpdate /></ProtectedRoute>} />
+                <Route path="/update/user/profile/" element={<ProtectedRoute><UserProfileUpdate /></ProtectedRoute>} />
 
             </Routes>
         </>

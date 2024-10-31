@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './UserProfile.css';
 import { baseUrl } from '../Variable';
+import { Link } from 'react-router-dom';
 
 const UserProfile = () => {
     const [profile, setProfile] = useState(null);
@@ -53,6 +54,11 @@ const UserProfile = () => {
                 <h2 className="profile-name">{profile.full_name}</h2>
                 <p className="profile-info"><strong>Phone:</strong> {profile.phone || 'N/A'}</p>
                 <p className="profile-info"><strong>Email:</strong> {profile.email}</p>
+                <button type="button">
+                    <Link to={'/update/user/profile/'}>
+                        Edit Profile
+                    </Link>
+                </button>
             </div>
         </div>
     );
