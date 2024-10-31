@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../Variable';
+import './AddStock.css'
 
 const AddStock = () => {
     const [productId, setProductId] = useState('');
