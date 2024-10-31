@@ -29,7 +29,12 @@ const EditProduct = () => {
 
     const fetchProduct = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/products/${productId}/`);
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`${baseUrl}/products/${productId}/`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
             setFormData({
                 name: response.data.name,
                 description: response.data.description,
@@ -44,7 +49,12 @@ const EditProduct = () => {
 
     const fetchCategories = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/categories/`);
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`${baseUrl}/categories/`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
             setCategories(response.data);
         } catch (err) {
             setError('Failed to fetch categories. Please try again.');
@@ -71,8 +81,12 @@ const EditProduct = () => {
         }
 
         try {
+            const token = localStorage.getItem('token');
             await axios.put(`${baseUrl}/products/${productId}/`, form, {
-                headers: { 'Content-Type': 'multipart/form-data' },
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${token}`,
+                },
             });
             alert('Product updated successfully');
             navigate('/product/list/');

@@ -16,18 +16,19 @@ const AddCategory = () => {
         e.preventDefault();
         setError('');
         setSuccess('');
-
+    
         const formData = new FormData();
         formData.append('name', categoryName);
         formData.append('description', description);
         if (categoryImage) {
             formData.append('category_image', categoryImage);
         }
-
+    
         try {
             const response = await axios.post(`${baseUrl}/categories/`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`  // Retrieve token from local storage
                 },
             });
             setSuccess('Category added successfully!');
@@ -36,12 +37,13 @@ const AddCategory = () => {
             setCategoryImage(null);
         } catch (err) {
             if (err.response) {
-                setError(err.response.data.name[0]); // Show specific error message
+                setError(err.response.data.name ? err.response.data.name[0] : 'An error occurred while adding the category.');
             } else {
                 setError('An error occurred while adding the category.');
             }
         }
     };
+    
 
     return (
         <div className="container mt-5">

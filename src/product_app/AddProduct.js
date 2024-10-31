@@ -21,7 +21,12 @@ const AddProduct = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get(`${baseUrl}/categories/`);
+                const token = localStorage.getItem('token'); // Retrieve token from local storage or authentication state
+                const response = await axios.get(`${baseUrl}/categories/`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
                 setCategories(response.data);
             } catch (err) {
                 setError('Failed to fetch categories. Please try again.');
@@ -52,8 +57,12 @@ const AddProduct = () => {
         }
 
         try {
+            const token = localStorage.getItem('token');
             await axios.post(`${baseUrl}/products/`, form, {
-                headers: { 'Content-Type': 'multipart/form-data' },
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${token}`,
+                },
             });
             setSuccess('Product added successfully!');
             navigate('/product/list/');

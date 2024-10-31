@@ -44,7 +44,7 @@ const Dashboard = () => {
                 <h3>Total Products</h3>
                 <div className="count text-black">
                     <Link to={'/product/list/'}>
-                        {productCount}
+                        <div className='text-black text-decoration-none'>{productCount}</div>
                     </Link>
                 </div>
             </div>
@@ -52,7 +52,7 @@ const Dashboard = () => {
                 <h3>Total Categories</h3>
                 <div className="count text-black">
                     <Link to='/categories/'>
-                        {categoryCount}
+                        <div className='text-black text-decoration-none'>{categoryCount}</div>
                     </Link>
                 </div>
             </div>

@@ -21,17 +21,27 @@ const CategoryList = () => {
 
     const fetchCategories = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/categories/`);
+            const token = localStorage.getItem('token');  // Retrieve token from local storage or context
+            const response = await axios.get(`${baseUrl}/categories/`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
             setCategories(response.data);
         } catch (err) {
             setError('Failed to fetch categories. Please try again.');
         }
     };
-
+    
     const deleteCategory = async (id) => {
         if (window.confirm("Are you sure you want to delete this category?")) {
             try {
-                await axios.delete(`${baseUrl}/category/delete/${id}/`);
+                const token = localStorage.getItem('token');
+                await axios.delete(`${baseUrl}/category/delete/${id}/`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
                 setSuccess('Category deleted successfully!');
                 fetchCategories();
             } catch (err) {
@@ -39,7 +49,7 @@ const CategoryList = () => {
             }
         }
     };
-
+    
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
         const form = new FormData();
@@ -48,10 +58,14 @@ const CategoryList = () => {
         if (formData.category_image) {
             form.append('category_image', formData.category_image);
         }
-
+    
         try {
+            const token = localStorage.getItem('token');
             await axios.put(`${baseUrl}/category/update/${selectedCategory.id}/`, form, {
-                headers: { 'Content-Type': 'multipart/form-data' },
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${token}`,
+                },
             });
             setSuccess('Category updated successfully!');
             setSelectedCategory(null);
@@ -60,6 +74,7 @@ const CategoryList = () => {
             setError('Failed to update category. Please try again.');
         }
     };
+    
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;

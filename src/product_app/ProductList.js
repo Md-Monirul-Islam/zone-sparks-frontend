@@ -15,22 +15,32 @@ const ProductList = () => {
         fetchProducts();
     }, []);
 
-    // Fetch product list
+    // Fetch product list with authentication
     const fetchProducts = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/products/`);
+            const token = localStorage.getItem('token'); // Retrieve token from local storage
+            const response = await axios.get(`${baseUrl}/products/`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
             setProducts(response.data);
         } catch (err) {
             setError('Failed to fetch products. Please try again.');
         }
     };
 
-    // Handle delete product
+    // Handle delete product with authentication
     const handleDelete = async (productId) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this product?");
         if (confirmDelete) {
             try {
-                await axios.delete(`${baseUrl}/products/${productId}/delete/`);
+                const token = localStorage.getItem('token');
+                await axios.delete(`${baseUrl}/products/${productId}/delete/`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
                 setProducts(products.filter(product => product.id !== productId));
                 alert('Product deleted successfully');
             } catch (err) {
