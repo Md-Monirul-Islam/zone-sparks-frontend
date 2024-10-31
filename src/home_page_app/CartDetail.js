@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { baseUrl } from '../Variable';
 import './CartDetail.css';
 
 const CartDetail = ({ updateCartCount }) => {
     const [cartItems, setCartItems] = useState([]);
     const [error, setError] = useState('');
-    const [totalPrice, setTotalPrice] = useState(0); // Ensure totalPrice is initialized as a number
+    const [totalPrice, setTotalPrice] = useState(0);
+    const token = localStorage.getItem('token');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCartDetails = async () => {
@@ -20,7 +23,7 @@ const CartDetail = ({ updateCartCount }) => {
 
                 const itemsWithDetails = responses.map(response => response.data);
                 setCartItems(itemsWithDetails);
-                calculateTotalPrice(itemsWithDetails); // Calculate total price on fetch
+                calculateTotalPrice(itemsWithDetails);
             } catch (err) {
                 setError('Failed to load cart details.');
             }
@@ -29,24 +32,65 @@ const CartDetail = ({ updateCartCount }) => {
         fetchCartDetails();
     }, []);
 
-    // Function to calculate total price
     const calculateTotalPrice = (items) => {
-        const total = items.reduce((acc, item) => acc + (Number(item.price) || 0), 0); // Ensure item.price is treated as a number
+        const total = items.reduce((acc, item) => acc + (Number(item.price) || 0), 0);
         setTotalPrice(total);
     };
 
     const handleRemoveFromCart = (productId) => {
         const updatedCartItems = cartItems.filter(item => item.id !== productId);
         setCartItems(updatedCartItems);
-        calculateTotalPrice(updatedCartItems); // Recalculate total price after removal
+        calculateTotalPrice(updatedCartItems);
 
         const updatedLocalStorageCart = JSON.parse(localStorage.getItem('cartItems')).filter(
             item => item.id !== productId
         );
         localStorage.setItem('cartItems', JSON.stringify(updatedLocalStorageCart));
 
-        // Update cart count
         updateCartCount(updatedLocalStorageCart.length);
+    };
+
+    const handlePlaceOrder = async () => {
+        // Check if the user is logged in
+        if (!token) {
+            alert('You must be logged in to place an order.');
+            navigate('/login/'); // Redirect to login page
+            return;
+        }
+
+        try {
+            const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+            // Define payload to send to backend
+            const payload = {
+                cartItems: storedCartItems,
+                paymentMethod: 'Cash On Delivery',
+                totalAmount: totalPrice,
+            };
+
+            // Send a POST request to submit the order
+            const response = await axios.post(`${baseUrl}/submit/order/`, payload, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`, // Include auth token if required
+                },
+            });
+
+            if (response.status === 201) {
+                alert('Order placed successfully!');
+
+                // Clear cart items from local storage and state
+                localStorage.removeItem('cartItems');
+                setCartItems([]);
+                setTotalPrice(0);
+                updateCartCount(0); // Update cart count to 0
+            } else {
+                alert('Failed to place order');
+            }
+        } catch (error) {
+            console.error('Error placing order:', error);
+            alert('Error placing order');
+        }
     };
 
     if (cartItems.length === 0) {
@@ -71,7 +115,7 @@ const CartDetail = ({ updateCartCount }) => {
             <p className="total-items">Total Items: {cartItems.length}</p>
             <p className="total-price">Total Price: TK. {totalPrice.toFixed(2)}</p>
             <div>
-                <button>Place your order</button>
+                <button onClick={handlePlaceOrder}>Place your order</button>
             </div>
         </div>
     );

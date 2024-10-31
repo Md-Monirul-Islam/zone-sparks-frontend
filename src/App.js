@@ -16,6 +16,7 @@ import ProductDetail from './home_page_app/ProductDetail';
 import CartDetail from './home_page_app/CartDetail';
 import UserProfile from './customer_app/UserProfile';
 import UserProfileUpdate from './account_app/UserProfileUpdate';
+import submitOrder from './customer_app/SubmitOrder';
 
 
 
@@ -60,6 +61,8 @@ function App() {
                 <Route path="/user-profile/:userId" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
                 
                 <Route path="/update/user/profile/" element={<ProtectedRoute><UserProfileUpdate /></ProtectedRoute>} />
+
+                <Route path="/submit/order/" element={<ProtectedRoute><submitOrder /></ProtectedRoute>} />
 
             </Routes>
         </>
