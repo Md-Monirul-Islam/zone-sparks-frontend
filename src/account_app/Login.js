@@ -33,21 +33,22 @@ const Login = () => {
             email,
             password,
         });
-        
+
         if (response.status === 200) {
-          const { user_id, email, token } = response.data;
-          login({ user_id, email, token }); // store token in AuthContext
-          localStorage.setItem('token', token); // store token in localStorage for future use
-          setSuccess("Login successful!");
-          setEmail("");
-          setPassword("");
-          navigate('/dashboard/');
-      }
-      
+            const { user_id, email, token } = response.data;
+            login({ user_id, email, token });
+            localStorage.setItem('user_id', user_id);  // Save user ID in localStorage
+            localStorage.setItem('token', token);       // Save token for future use
+            setSuccess("Login successful!");
+            setEmail("");
+            setPassword("");
+            navigate('/dashboard/');
+        }
     } catch (err) {
         setError(err.response?.data?.error || "An error occurred during login");
     }
 };
+
 
 
 return (

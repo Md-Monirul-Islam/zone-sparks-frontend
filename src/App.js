@@ -11,10 +11,13 @@ import ProductList from './product_app/ProductList';
 import AddProduct from './product_app/AddProduct';
 import EditProduct from './product_app/EditProduct';
 import Dashboard from './dashboard/Dashboard';
-import UserProfileUpdate from './account_app/UserProfileUpdate';
 import HomePage from './home_page_app/HomePage';
 import ProductDetail from './home_page_app/ProductDetail';
 import CartDetail from './home_page_app/CartDetail';
+import UserProfile from './customer_app/UserProfile';
+import UserProfileUpdate from './account_app/UserProfileUpdate';
+
+
 
 function App() {
     const ProtectedRoute = ({ children }) => {
@@ -54,7 +57,10 @@ function App() {
 
                 <Route path="/dashboard/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 
-                <Route path="/update/user/profile/" element={<ProtectedRoute><UserProfileUpdate /></ProtectedRoute>} />
+                <Route path="/user-profile/:userId" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+                
+                <Route path="/update-user-profile/" element={<ProtectedRoute><UserProfileUpdate /></ProtectedRoute>} />
+
             </Routes>
         </>
     );
