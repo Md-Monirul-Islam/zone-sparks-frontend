@@ -1,4 +1,5 @@
-import {Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Signup from './account_app/Signup';
@@ -12,93 +13,51 @@ import EditProduct from './product_app/EditProduct';
 import Dashboard from './dashboard/Dashboard';
 import UserProfileUpdate from './account_app/UserProfileUpdate';
 import HomePage from './home_page_app/HomePage';
+import ProductDetail from './home_page_app/ProductDetail';
+import CartDetail from './home_page_app/CartDetail';
 
 function App() {
+    const ProtectedRoute = ({ children }) => {
+        const isAuthenticated = !!localStorage.getItem('token');
+        return isAuthenticated ? children : <Navigate to="/login/" />;
+    };
 
-  const ProtectedRoute = ({ children }) => {
-    const isAuthenticated = !!localStorage.getItem('token');
-  
-    return isAuthenticated ? children : <Navigate to="/login/" />;
-  };
+    const [cartCount, setCartCount] = useState(0);
 
-  return (
-    <>
-    <Navbar />
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-      </Routes>
+    const updateCartCount = (count) => {
+        setCartCount(count);
+    };
 
-      <Routes>
-        <Route path='/signup/' element={<Signup />} />
-      </Routes>
+    return (
+        <>
+            <Navbar cartCount={cartCount} />
+            <Routes>
+                <Route path='/' element={<HomePage />} />
 
-      <Routes>
-        <Route path='/login/' element={<Login />} />
-      </Routes>
+                <Route path='/product/details/:productId/' element={<ProductDetail updateCartCount={updateCartCount} />} />
 
-      <Routes>
-        <Route path='/add/category/' element={
-          <ProtectedRoute>
-            <AddCategory />
-          </ProtectedRoute>
-          } />
-      </Routes>
+                <Route path="/cart/" element={<CartDetail updateCartCount={updateCartCount} />} />
 
-      <Routes>
-        <Route path='/category/list/' element={<CategoryList />} />
-      </Routes>
+                <Route path='/signup/' element={<Signup />} />
 
-      <Routes>
-        <Route path="/categories/" element={
-          <ProtectedRoute>
-            <CategoryList />
-          </ProtectedRoute>
-          } />
-      </Routes>
+                <Route path='/login/' element={<Login />} />
 
-      <Routes>
-        <Route path="/product/list/" element={<ProductList />} />
-      </Routes>
+                <Route path='/add/category/' element={<ProtectedRoute><AddCategory /></ProtectedRoute>} />
+                
+                <Route path="/categories/" element={<ProtectedRoute><CategoryList /></ProtectedRoute>} />
 
-      <Routes>
-        <Route path="/add/product/" element={
-          <ProtectedRoute>
-            <AddProduct />
-          </ProtectedRoute>
-          } />
-      </Routes>
+                <Route path="/product/list/" element={<ProductList />} />
 
-      <Routes>
-        <Route path="/edit/product/:productId" element={
-          <ProtectedRoute>
-            <EditProduct />
-          </ProtectedRoute>
-          } />
-      </Routes>
+                <Route path="/add/product/" element={<ProtectedRoute><AddProduct /></ProtectedRoute>} />
 
-      <Routes>
-        <Route
-          path="/dashboard/"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-    </Routes>
+                <Route path="/edit/product/:productId" element={<ProtectedRoute><EditProduct /></ProtectedRoute>} />
 
-      <Routes>
-        <Route
-          path="/update/user/profile/"
-          element={
-            <ProtectedRoute>
-              <UserProfileUpdate />
-            </ProtectedRoute>
-          }
-        />
-    </Routes>
-    </>
-  );
+                <Route path="/dashboard/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+
+                <Route path="/update/user/profile/" element={<ProtectedRoute><UserProfileUpdate /></ProtectedRoute>} />
+            </Routes>
+        </>
+    );
 }
 
 export default App;
