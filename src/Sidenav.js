@@ -31,6 +31,14 @@ const Sidenav = () => {
                         Products
                     </Link>
                 </li>
+                <li>
+                    <Link
+                        to="/add/stock/"
+                        className={`list-group-item list-group-item-action ${location.pathname === '/add/stock/' ? 'active' : ''}`}
+                    >
+                        Stock
+                    </Link>
+                </li>
             </ul>
         </div>
     );
