@@ -1,0 +1,18 @@
+.sidenav {
+    background-color: #343a40;
+    border-right: 1px solid #dee2e6;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    width: 250px;
+    color: #ffffff;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Main content styles */
+.main-content {
+    margin-left: 250px; /* Matches the sidenav width */
+    padding: 20px;
+}

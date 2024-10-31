@@ -17,11 +17,11 @@ const AddProduct = () => {
     const [success, setSuccess] = useState('');
     const navigate = useNavigate();
 
-    // Fetch categories for the dropdown menu
+    // Fetch categories for the dropdown
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const token = localStorage.getItem('token'); // Retrieve token from local storage or authentication state
+                const token = localStorage.getItem('token');
                 const response = await axios.get(`${baseUrl}/categories/`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -35,7 +35,7 @@ const AddProduct = () => {
         fetchCategories();
     }, []);
 
-    // Handle form field changes
+    // Handle input changes
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         setFormData({
@@ -65,85 +65,90 @@ const AddProduct = () => {
                 },
             });
             setSuccess('Product added successfully!');
+            setError('');
             navigate('/product/list/');
         } catch (err) {
             setError('Failed to add product. Please try again.');
+            setSuccess('');
         }
     };
 
     return (
-        <div className="container">
+        <div className="container-fluid">
             <Sidenav />
-            <h2 className="text-center mb-4">Add New Product</h2>
-            {error && <p className="text-danger">{error}</p>}
-            {success && <p className="text-success">{success}</p>}
-            <form onSubmit={handleSubmit} className="border p-4 rounded shadow">
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Product Name:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        className="form-control"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="description" className="form-label">Description:</label>
-                    <textarea
-                        id="description"
-                        name="description"
-                        className="form-control"
-                        value={formData.description}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="price" className="form-label">Price:</label>
-                    <input
-                        type="number"
-                        id="price"
-                        name="price"
-                        className="form-control"
-                        value={formData.price}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="category" className="form-label">Category:</label>
-                    <select
-                        id="category"
-                        name="category"
-                        className="form-control"
-                        value={formData.category}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option value="">Select Category</option>
-                        {categories.map((category) => (
-                            <option key={category.id} value={category.id}>
-                                {category.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="product_image" className="form-label">Product Image:</label>
-                    <input
-                        type="file"
-                        id="product_image"
-                        name="product_image"
-                        className="form-control"
-                        accept="image/*"
-                        onChange={handleChange}
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary">Add Product</button>
-            </form>
+            <div className="main-content">
+                <h2 className="text-center mb-4">Add New Product</h2>
+                {error && <p className="text-danger">{error}</p>}
+                {success && <p className="text-success">{success}</p>}
+                <form onSubmit={handleSubmit} className="border p-4 rounded shadow">
+                    <div className="form-group mb-3">
+                        <label htmlFor="name">Product Name</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group mb-3">
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                            className="form-control"
+                            id="description"
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                            rows="4"
+                            required
+                        />
+                    </div>
+                    <div className="form-group mb-3">
+                        <label htmlFor="price">Price</label>
+                        <input
+                            type="number"
+                            className="form-control"
+                            id="price"
+                            name="price"
+                            value={formData.price}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group mb-3">
+                        <label htmlFor="category">Category</label>
+                        <select
+                            className="form-control"
+                            id="category"
+                            name="category"
+                            value={formData.category}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="">Select Category</option>
+                            {categories.map((category) => (
+                                <option key={category.id} value={category.id}>
+                                    {category.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="form-group mb-3">
+                        <label htmlFor="product_image">Product Image</label>
+                        <input
+                            type="file"
+                            className="form-control"
+                            id="product_image"
+                            name="product_image"
+                            onChange={handleChange}
+                            accept="image/*"
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-primary w-100">Add Product</button>
+                </form>
+            </div>
         </div>
     );
 };

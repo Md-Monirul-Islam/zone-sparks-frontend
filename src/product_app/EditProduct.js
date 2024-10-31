@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { baseUrl } from '../Variable';
 import Sidenav from '../Sidenav';
+import './EditProductList.css'
 
 const EditProduct = () => {
     const { productId } = useParams();
@@ -98,9 +99,9 @@ const EditProduct = () => {
     if (loading) return <div>Loading...</div>; // Loading state handling
 
     return (
-        <div><br></br><br></br>
+        <div>
             <Sidenav />
-            <div className="container mt-5">
+            <div className="main-content">
             <h2>Edit Product</h2>
             {error && <p className="text-danger">{error}</p>}
             <form onSubmit={handleSubmit}>

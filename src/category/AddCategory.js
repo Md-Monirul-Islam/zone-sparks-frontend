@@ -45,7 +45,7 @@ const AddCategory = () => {
     
 
     return (
-        <div className="container mt-5">
+        <div className="container">
             <div className="row">
                 {/* Sidebar Column */}
                 <div className="col-md-3 col-12 mb-2">

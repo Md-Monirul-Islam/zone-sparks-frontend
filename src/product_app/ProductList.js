@@ -55,17 +55,17 @@ const ProductList = () => {
     };
 
     return (
-        <div className="container mt-3">
+        <div className="container-fluid">
             <Sidenav />
-            <div className="content">
-                <div className="header">
-                    <h2 className="text-center mb-4">Product List</h2>
-                    <Link to="/add/product/" className="btn btn-primary add-product-button ms-4">
+            <div className="main-content">
+                <div className="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Product List</h2>
+                    <Link to="/add/product/" className="btn btn-primary add-product-button">
                         Add Product
                     </Link>
                 </div>
                 {error && <p className="text-danger">{error}</p>}
-                <table className="table table-bordered">
+                <table className="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -81,7 +81,7 @@ const ProductList = () => {
                                 <td>TK. {product.price}</td>
                                 <td>
                                     {product.product_image ? (
-                                        <img src={product.product_image} alt={product.name} width="50" height="50" />
+                                        <img src={product.product_image} alt={product.name} className="product-image" />
                                     ) : (
                                         'No Image'
                                     )}
