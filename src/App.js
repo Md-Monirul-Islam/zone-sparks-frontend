@@ -35,7 +35,7 @@ function App() {
         <>
             <Navbar cartCount={cartCount} />
             <Routes>
-                <Route path='/' element={<HomePage />} />
+                <Route path='/' element={<HomePage updateCartCount={updateCartCount} />} />
 
                 <Route path='/product/details/:productId/' element={<ProductDetail updateCartCount={updateCartCount} />} />
 

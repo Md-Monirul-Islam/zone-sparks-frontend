@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './ProductList.css'
+import './ProductList.css';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, isInCart, handleAddToCart }) => {
     return (
         <div className="card">
             <img src={product.product_image || 'placeholder.jpg'} alt={product.name} className="card-img-top" />
@@ -11,7 +11,9 @@ const ProductCard = ({ product }) => {
                     <Link to={`/product/details/${product.id}/`}>{product.name}</Link>
                 </h5>
                 <p className="card-text">Price: TK. {product.price}</p>
-                <Link to='' className="buy-button">Add to Cart</Link>
+                <button onClick={handleAddToCart} className="buy-button">
+                    {isInCart ? 'Remove from Cart' : 'Add to Cart'}
+                </button>
             </div>
         </div>
     );
