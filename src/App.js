@@ -26,8 +26,18 @@ import EditStock from './product_app/EditStock';
 function App() {
     const ProtectedRoute = ({ children }) => {
         const isAuthenticated = !!localStorage.getItem('token');
-        return isAuthenticated ? children : <Navigate to="/login/" />;
-    };
+    const isSuperUser = localStorage.getItem('is_superuser') === 'true'; // Check for superuser status
+
+    if (!isAuthenticated) {
+        return <Navigate to="/login/" />;
+    }
+
+    if (isSuperUser) {
+        return children; // Allow access for superusers
+    }
+
+    return <Navigate to="/" />; // Redirect non-superusers to the homepage
+};
 
     const [cartCount, setCartCount] = useState(0);
 

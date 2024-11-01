@@ -33,14 +33,17 @@ const Login = () => {
         });
 
         if (response.status === 200) {
-            const { user_id, email, token } = response.data;
-            login({ user_id, email, token });
-            localStorage.setItem('user_id', user_id);  // Save user ID in localStorage
-            localStorage.setItem('token', token);       // Save token for future use
+            const { user_id, email, token, is_superuser } = response.data; // Ensure is_superuser is included
+            // Save user data in local storage
+            localStorage.setItem('user_id', user_id);
+            localStorage.setItem('token', token);
+            localStorage.setItem('is_superuser', is_superuser); // Save the superuser status
+
+            // Redirect based on superuser status
+            navigate(is_superuser ? '/dashboard/' : '/'); // Redirect based on the superuser status
             setSuccess("Login successful!");
             setEmail("");
             setPassword("");
-            navigate('/dashboard/');
         }
     } catch (err) {
         setError(err.response?.data?.error || "An error occurred during login");
