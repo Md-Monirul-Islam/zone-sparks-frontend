@@ -10,21 +10,21 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Check if the user is logged in when the app loads
-    const user = localStorage.getItem('user');
-    setIsLoggedIn(!!user); // Set based on user data presence in local storage
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token); // Set based on token presence
   }, []);
 
-  // Function to handle login
   const login = (userData) => {
     localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('token', userData.token);
     setIsLoggedIn(true);
   };
 
-  // Function to handle logout
   const logout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('user_id');
     localStorage.removeItem('token');
+    localStorage.removeItem('is_superuser');
     setIsLoggedIn(false);
   };
 
