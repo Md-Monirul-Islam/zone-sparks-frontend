@@ -7,8 +7,12 @@ To set up and run this project locally, follow these steps:
    ```bash
    cd zone-sparks-frontend
 
-2. **Install the required packages by running:**
-npm install
+2. **Install the required packages by running**
+
+    ```bash
+    npm install
 
 3. **Start the Development Server**
-npm start
+
+    ```bash
+    npm start
