@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../Variable';
-import './AddStock.css'
+import './AddStock.css';
 
 const AddStock = () => {
     const [productId, setProductId] = useState('');
@@ -41,7 +41,6 @@ const AddStock = () => {
             return;
         }
     
-        // Validate quantity before sending the request
         if (quantity === '' || isNaN(quantity) || Number(quantity) <= 0) {
             setMessage('Please enter a valid quantity greater than 0.');
             return;
@@ -49,10 +48,9 @@ const AddStock = () => {
     
         try {
             const token = localStorage.getItem('token');
-    
             const response = await axios.post(`${baseUrl}/add-stock/`, {
                 product_id: selectedProduct.id,
-                quantity: Number(quantity), // Convert to number
+                quantity: Number(quantity),
             }, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -68,28 +66,26 @@ const AddStock = () => {
             }
         } catch (error) {
             console.error('Error adding stock:', error);
-            if (error.response && error.response.data) {
-                setMessage(error.response.data.detail || 'Failed to add stock. Please check the quantity.');
-            } else {
-                setMessage('Failed to add stock. Please check the quantity.');
-            }
+            setMessage(error.response?.data?.detail || 'Failed to add stock. Please check the quantity.');
         }
     };
-    
 
     return (
         <div className="add-stock-container">
             <h2>Add Stock</h2>
             <form onSubmit={handleAddStock}>
-                <div>
+                <div className="input-group">
                     <label>Search Product:</label>
                     <input
                         type="text"
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={(e) => {
+                            setSearchTerm(e.target.value);
+                            setSelectedProduct(null); // Reset selection if user types again
+                        }}
                         required
                     />
-                    {products.length > 0 && (
+                    {products.length > 0 && !selectedProduct && (
                         <ul className="search-results">
                             {products.map((product) => (
                                 <li key={product.id} onClick={() => {
@@ -103,7 +99,7 @@ const AddStock = () => {
                         </ul>
                     )}
                 </div>
-                <div>
+                <div className="input-group">
                     <label>Quantity:</label>
                     <input
                         type="number"
