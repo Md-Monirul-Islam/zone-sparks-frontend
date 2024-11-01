@@ -12,7 +12,7 @@ const StockList = () => {
         const fetchStocks = async () => {
             const token = localStorage.getItem('token');
             if (!token) {
-                navigate('/login'); // Redirect to login if no token
+                navigate('/login/'); // Redirect to login if no token
                 return;
             }
 
@@ -26,7 +26,7 @@ const StockList = () => {
             } catch (error) {
                 console.error("Error fetching stock data:", error);
                 if (error.response && error.response.status === 401) {
-                    navigate('/login'); // Redirect if token is invalid/expired
+                    navigate('/login/'); // Redirect if token is invalid/expired
                 }
             }
         };
@@ -69,6 +69,8 @@ const StockList = () => {
                             <th>Product Name</th>
                             <th>Price</th>
                             <th>Quantity</th>
+                            <th>Stock Status</th>
+                            <th>Total Sales</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -78,6 +80,8 @@ const StockList = () => {
                                 <td>{stock.product_name}</td>
                                 <td>TK. {stock.product_price}</td>
                                 <td>{stock.quantity}</td>
+                                <td>{stock.stock_status}</td>
+                                <td>{stock.total_sales}</td>
                                 <td>
                                     <button 
                                         onClick={() => handleEdit(stock.id)} 

@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../authentication/AuthContext';
 
 export default function Navbar({ cartCount }) {
     const navigate = useNavigate();
-    const { isLoggedIn, logout } = useAuth();
+    const { isLoggedIn, logout, checkAuth } = useAuth();
+    const [isSuperuser, setIsSuperuser] = useState(false);
+
+    useEffect(() => {
+        const superuserStatus = checkAuth(); // Check if the user is a superuser
+        setIsSuperuser(superuserStatus);
+    }, [isLoggedIn]); // Re-check on login status change
 
     const handleLogout = () => {
         logout();
@@ -25,11 +31,18 @@ export default function Navbar({ cartCount }) {
                                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                             </li>
                             {isLoggedIn ? (
-                                <li className="nav-item">
-                                    <button className="nav-link btn btn-link" onClick={handleLogout}>
-                                        Logout
-                                    </button>
-                                </li>
+                                <>
+                                    {isSuperuser && ( // Show Dashboard link only if user is a superuser
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to="/dashboard/">Dashboard</Link>
+                                        </li>
+                                    )}
+                                    <li className="nav-item">
+                                        <button className="nav-link btn btn-link" onClick={handleLogout}>
+                                            Logout
+                                        </button>
+                                    </li>
+                                </>
                             ) : (
                                 <>
                                     <li className="nav-item">
@@ -46,7 +59,8 @@ export default function Navbar({ cartCount }) {
                         </ul>
                     </div>
                 </div>
-            </nav><br /><br />
+            </nav>
+            <br /><br />
         </div>
     );
 }

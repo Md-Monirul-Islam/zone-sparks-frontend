@@ -1,36 +1,32 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 
-// Create the Auth Context
 const AuthContext = createContext();
 
-// Custom hook for easy access to AuthContext
-export const useAuth = () => useContext(AuthContext);
-
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token); // Set based on token presence
-  }, []);
+    const checkAuth = () => {
+        const token = localStorage.getItem('token');
+        const isSuperuser = localStorage.getItem('is_superuser') === 'true'; // Get superuser status from local storage
+        setIsLoggedIn(!!token); // Update login status based on token
+        return isSuperuser; // Return superuser status
+    };
 
-  const login = (userData) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('token', userData.token);
-    setIsLoggedIn(true);
-  };
+    const logout = () => {
+      localStorage.removeItem('user');
+      localStorage.removeItem('user_id');
+      localStorage.removeItem('token');
+      localStorage.removeItem('is_superuser');
+      setIsLoggedIn(false);
+    };
 
-  const logout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('user_id');
-    localStorage.removeItem('token');
-    localStorage.removeItem('is_superuser');
-    setIsLoggedIn(false);
-  };
+    return (
+        <AuthContext.Provider value={{ isLoggedIn, logout, checkAuth }}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
 
-  return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+export const useAuth = () => {
+    return useContext(AuthContext);
 };
