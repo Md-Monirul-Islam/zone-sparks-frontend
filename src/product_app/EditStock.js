@@ -63,7 +63,7 @@ const EditStock = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            navigate('/stock-list/');
+            navigate('/stock/list/');
         } catch (error) {
             console.error("Error updating stock data:", error);
             setError("Failed to update stock data. Please try again.");
