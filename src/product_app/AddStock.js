@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../Variable';
 import './AddStock.css';
+import Sidenav from '../Sidenav';
 
 const AddStock = () => {
     const [productId, setProductId] = useState('');
@@ -71,7 +72,8 @@ const AddStock = () => {
     };
 
     return (
-        <div className="add-stock-container">
+        <div className="add-stock-container mt-5">
+        <Sidenav />
             <h2>Add Stock</h2>
             <form onSubmit={handleAddStock}>
                 <div className="input-group">

@@ -33,8 +33,8 @@ const Sidenav = () => {
                 </li>
                 <li>
                     <Link
-                        to="/add/stock/"
-                        className={`list-group-item list-group-item-action ${location.pathname === '/add/stock/' ? 'active' : ''}`}
+                        to="/stock/list/"
+                        className={`list-group-item list-group-item-action ${location.pathname === '/stock/list/' ? 'active' : ''}`}
                     >
                         Stock
                     </Link>

@@ -46,7 +46,7 @@ export default function Navbar({ cartCount }) {
                         </ul>
                     </div>
                 </div>
-            </nav><br /><br /><br /><br /><br />
+            </nav><br /><br />
         </div>
     );
 }

@@ -1,0 +1,56 @@
+.edit-stock-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidenav Styles */
+.edit-stock-layout .sidenav {
+    width: 250px;
+    height: 100vh;
+    background-color: #343a40;
+    padding-top: 20px;
+    color: #fff;
+    position: fixed;
+}
+
+/* Main Content Area Styling */
+.edit-stock-container {
+    margin-left: 250px;
+    padding: 2px;
+    flex-grow: 1;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Form and Button Styling */
+.edit-stock-form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-stock-form label {
+    font-weight: bold;
+}
+
+.edit-stock-form .form-control {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 20px;
+    max-width: 20%;
+}
+
+.btn-secondary {
+    padding: 10px 20px;
+}
+
+.text-danger {
+    color: #dc3545;
+}

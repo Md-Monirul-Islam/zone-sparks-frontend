@@ -89,3 +89,13 @@
     background-color: #f7f7f7;
     color: #3e0391;
 }
+
+/* Sidenav Styles */
+.edit-stock-layout .sidenav {
+    width: 250px;
+    height: 100vh;
+    background-color: #343a40;
+    padding-top: 20px;
+    color: #fff;
+    position: fixed;
+}

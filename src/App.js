@@ -18,6 +18,8 @@ import UserProfile from './customer_app/UserProfile';
 import UserProfileUpdate from './account_app/UserProfileUpdate';
 import submitOrder from './customer_app/SubmitOrder';
 import AddStock from './product_app/AddStock';
+import StockList from './product_app/StockList';
+import EditStock from './product_app/EditStock';
 
 
 
@@ -66,6 +68,10 @@ function App() {
                 <Route path="/submit/order/" element={<ProtectedRoute><submitOrder /></ProtectedRoute>} />
 
                 <Route path="/add/stock/" element={<ProtectedRoute><AddStock /></ProtectedRoute>} />
+
+                <Route path="/stock/list/" element={<ProtectedRoute><StockList /></ProtectedRoute>} />
+
+                <Route path="/edit/stock/:id/" element={<ProtectedRoute><EditStock /></ProtectedRoute>} />
 
             </Routes>
         </>
